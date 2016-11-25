@@ -1,6 +1,9 @@
 import sys
 
 def readnumber():
+	if len(sys.argv) == 2:
+		return sys.argv[1]
+		return
 	number = raw_input("Please enter a number: ")
 	while type(number)!=int:
 		if number.isdigit():
@@ -11,21 +14,24 @@ def readnumber():
 def numsplit():
 	number = readnumber()
 	jnumber = ""
-	#print len(number)
 	while len(number) > 0:			
 		if len(number) == 1:
 			jnumber += singledigits(number)
 			number = number[1:]
-			return jnumber
+			break
 		if len(number) == 2:
 			jnumber += tens(number[0])
 			number = number[1:]
+			break
 		if len(number) == 3:
 		 	jnumber += hundreds(number[0])
 		 	number = number[1:]
-	
-	#	else:
-	#		return "Too large a number to process!"
+		 	break
+		else:
+			number = ""
+			return "Too large a number to process!"
+	return jnumber
+
 	
 def singledigits(n):
 	numbers = { "0":"",
@@ -51,6 +57,7 @@ def tens(n):
 	 			"7": "nana", 
 	 			"8": "hachi", 
 	 			"9": "kyuu"}
+	if n == "0": return("")
 	if n == "1": return(" "+numbers[n])
 	else: return(" "+numbers[n]+"-"+numbers["1"])
 	
@@ -65,6 +72,7 @@ def hundreds(n):
 	 			"7": "nanah", 
 	 			"8": "happ", 
 	 			"9": "kyuuh"}
+	if n == "0": return("")
 	if n == "1": return("h"+numbers[n])
 	else: return(numbers[n]+numbers["1"])
 
