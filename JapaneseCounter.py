@@ -1,37 +1,50 @@
 import sys
 
+def splash():
+	print "------------------------------------------------"
+	print "--------------- Japanese Counter ---------------"
+	print "------------------------------------------------"
+	print "      Enter an integer digit to translate       "
+	print "      into Japanese, or enter 'Q' to quit.      "
+	print "------------------------------------------------"
+
+
 def readnumber():
 	if len(sys.argv) == 2:
 		return sys.argv[1]
-		return
+	splash()
 	number = raw_input("Please enter a number: ")
 	while type(number)!=int:
-		if number.isdigit():
+		if number in ['q','Q']:
+			print "Quitting..."
+			return 0
+		elif number.isdigit():
 			return number
 		else:
 			number = raw_input("Error! Please enter an integer number: ")
 
 def numsplit():
 	number = readnumber()
+	if number == 0: return 0
 	jnumber = ""
 	while len(number) > 0:			
 		if len(number) == 1:
 			jnumber += singledigits(number)
 			number = number[1:]
-			break
+			
 		if len(number) == 2:
 			jnumber += tens(number[0])
 			number = number[1:]
-			break
+			
 		if len(number) == 3:
 		 	jnumber += hundreds(number[0])
 		 	number = number[1:]
-		 	break
-		else:
-			number = ""
-			return "Too large a number to process!"
+		 	
+		# else:
+		# 	number = ""
+		# 	return "Too large a number to process!"
+	print jnumber
 	return jnumber
-
 	
 def singledigits(n):
 	numbers = { "0":"",
@@ -79,7 +92,7 @@ def hundreds(n):
 def thousands(n):
 	return 0
 
-print(numsplit())
+numsplit()
 
 
 
